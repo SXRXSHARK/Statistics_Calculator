@@ -11,14 +11,11 @@
 #include "funcs.h"
 
 
-
-
 int main() {
    char rerun;
    char compareChoice;
    std::vector<double> data1, data2;
    int choice;
-
 
    // Prompt for data input choice with validation
    do {
@@ -32,9 +29,7 @@ int main() {
            std::cout << "-----------------------------------\n";
            std::cout << "Enter your choice: ";
 
-
            std::cin >> choice;
-
 
            if (std::cin.fail() || choice < 1 || choice > 3) {
                std::cin.clear(); // Clear error state
@@ -45,7 +40,6 @@ int main() {
            }
        }
 
-
        // Handle data input based on choice
        if (choice == 1) {
            data1 = inputDataManually();
@@ -53,19 +47,16 @@ int main() {
            std::string filename;
            bool validFile = false;
 
-
            // Prompt for a valid file path
            while (!validFile) {
                std::cout << "Enter the " << (choice == 2 ? "CSV" : "image") << " file path: ";
-               std::cin >> filename;
-
+               std::getline(std::cin >> std::ws, filename);
 
                if (choice == 2) {
                    data1 = readDataFromCSV(filename);
                } else {
                    data1 = readDataFromImage(filename);
                }
-
 
                if (data1.empty()) {
                    std::cout << "Invalid file path or empty data..\n";
@@ -75,17 +66,14 @@ int main() {
            }
        }
 
-
        // Check if data is successfully loaded
        if (!data1.empty()) {
            std::cout << "Data loaded successfully.\n";
        }
 
-
        do {
            std::cout << "Do you want to compare this dataset with another? (Y/N): ";
            std::cin >> compareChoice;
-
 
            if (compareChoice != 'Y' && compareChoice != 'N' && compareChoice != 'y' && compareChoice != 'n') {
                std::cout << "Invalid input. Please enter 'Y' for yes or 'N' for no.\n";
@@ -104,9 +92,7 @@ int main() {
                    std::cout << "-------------------------------------\n";
                    std::cout << "Enter your choice: ";
 
-
                    std::cin >> choice;
-
 
                    if (std::cin.fail() || choice < 1 || choice > 6) {
                        std::cin.clear(); // Clear error state
@@ -116,7 +102,6 @@ int main() {
                        break;
                    }
                }
-
 
                switch (choice) {
                    case 1: std::cout << "Mean of dataset: " << calculateMean(data1) << std::endl; break;
@@ -129,7 +114,6 @@ int main() {
            }
        } while (compareChoice != 'Y' && compareChoice != 'y' && compareChoice != 'N' && compareChoice != 'n');
 
-
        if (compareChoice == 'Y' || compareChoice == 'y') {
            while (true) {
                std::cout << "\n----------- Main menu -----------\n";
@@ -141,9 +125,7 @@ int main() {
                std::cout << "-----------------------------------\n";
                std::cout << "Enter your choice: ";
 
-
                std::cin >> choice;
-
 
                if (std::cin.fail() || choice < 1 || choice > 3) {
                    std::cin.clear(); // Clear error state
@@ -154,7 +136,6 @@ int main() {
                }
            }
 
-
            // Handle data input based on choice
            if (choice == 1) {
                data2 = inputDataManually();
@@ -162,19 +143,16 @@ int main() {
                std::string filename;
                bool validFile = false;
 
-
                // Prompt for a valid file path
                while (!validFile) {
                    std::cout << "Enter the " << (choice == 2 ? "CSV" : "image") << " file path: ";
-                   std::cin >> filename;
-
+                   std::getline(std::cin >> std::ws, filename);
 
                    if (choice == 2) {
                        data2 = readDataFromCSV(filename);
                    } else {
                        data2 = readDataFromImage(filename);
                    }
-
 
                    if (data2.empty()) {
                        std::cout << "Invalid file path or empty data..\n";
@@ -184,12 +162,10 @@ int main() {
                }
            }
 
-
            // Check if data is successfully loaded
            if (!data2.empty()) {
                std::cout << "Data loaded successfully.\n";
            }
-
 
            while (true) {
                std::cout << "\n------- Choose an operation -------\n";
@@ -204,9 +180,7 @@ int main() {
                std::cout << "-------------------------------------\n";
                std::cout << "Enter your choice: ";
 
-
                std::cin >> choice;
-
 
                if (std::cin.fail() || choice < 1 || choice > 6) {
                    std::cin.clear(); // Clear error state
@@ -216,7 +190,6 @@ int main() {
                    break;
                }
            }
-
 
            switch (choice) {
                case 1:
@@ -246,15 +219,11 @@ int main() {
        }
 
 
-
-
            std::cout << "Do you want to rerun the program? (Y/N): ";
            std::cin >> rerun;
 
-
            // Convert input to uppercase to handle lowercase inputs
            rerun = toupper(rerun);
-
 
            // Input validation loop
            while (rerun != 'Y' && rerun != 'N') {
@@ -263,10 +232,9 @@ int main() {
                rerun = toupper(rerun); // Ensure uppercase
            }
 
-
        } while (rerun == 'Y'); // Continue if the user enters 'Y'
-
 
        std::cout << "Program exited. Have a nice day!" << std::endl;
        return 0;
    }
+
